@@ -10,8 +10,9 @@ const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   
-  
-  JSDOM.fromURL("https://www.ufc.com/events", options).then(dom => {
+  console.log('Starting JSDOM');
+  JSDOM.fromURL("https://www.ufc.com/events", { runScripts: 'dangerously' }).then(dom => {
+	console.log('Parsing DOM...')
 	console.log(dom.serialize());
   });
 
