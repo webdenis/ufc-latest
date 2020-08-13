@@ -8,7 +8,7 @@ const { JSDOM } = jsdom;
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
   
   console.log('Starting JSDOM');
   JSDOM.fromURL("https://www.ufc.com/events", { runScripts: 'dangerously' }).then(dom => {
