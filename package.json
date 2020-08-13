@@ -1,0 +1,15 @@
+{
+  "name": "ufc-latest",
+  "version": "1.0.0",
+  "description": "n/a",
+  "main": "app.js",
+  "dependencies": {
+    "sherdog": "^0.1.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Denis",
+  "license": "ISC"
+}
