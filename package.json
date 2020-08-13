@@ -4,14 +4,14 @@
   "description": "n/a",
   "main": "app.js",
   "dependencies": {
-    "sherdog": "^0.1.10"
+    "jsdom": "^16.4.0",
+    "node-html-parser": "^1.2.20"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"start": "node app.js"
+    "start": "node app.js"
   },
-  
   "author": "Denis",
   "license": "ISC"
 }
