@@ -9,10 +9,14 @@ a {
   text-decoration: none;
 }
 th {
-  padding-top: 7px;
+  padding: 8px;
 }
 td {
-  padding: 2px 7px;
+  padding: 2px 8px;
+}
+td:first-child {
+  padding-right: 100px;
+  color: #9b99c1;
 }
 .wiki {
   margin-left: 5px;
