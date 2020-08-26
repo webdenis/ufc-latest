@@ -1,54 +1,42 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var stylus = require('stylus');
 
-const http = require('http');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
-const hostname = 'localhost';
-const PORT = process.env.PORT || 3000;
+var app = express();
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-import pkg from 'node-html-parser';
-const { parse } = pkg;
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(stylus.middleware(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+app.use('/', indexRouter);
 
-// Settings
-const nextFightsNum = 5; // Number of next fights to generate
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  
-  JSDOM.fromURL("https://en.wikipedia.org/wiki/List_of_UFC_events").then(dom => {
-	
-	var root = parse(dom.serialize());
-	
-	var tables = root.querySelectorAll('.wikitable');
-	
-	// Get latest past fight
-	var latestFight = tables[1].querySelectorAll('tbody')[0].querySelectorAll('tr')[1].toString();
-	
-	// Get next fights
-	let children = tables[0].querySelectorAll('tbody')[0].childNodes;
-	
-	var nextFights = '';
-
-	for (let i = children.length; i >= children.length - nextFightsNum * 2; i--) {
-		if (children[i] && children[i].toString().length > 10) {
-			nextFights += children[i].toString();
-		}
-	}
-	
-	var output = '<h4>Latest event:</h4><table>' + latestFight + '</table><h4>Upcoming events:</h4><table>' + nextFights + '</table>';
-	
-	res.end(output);
-  });
-
-  //res.end('Hello World');
-
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
 
-server.listen(PORT, hostname, () => {
-  console.log(`Server running at http://${hostname}:${PORT}/`);
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
+
+module.exports = app;

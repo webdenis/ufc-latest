@@ -1,0 +1,54 @@
+extends layout
+
+block content
+	h1.heading=title
+	h2 Latest Event
+	div
+		p.extend
+			=latestFightContent.date
+			|  - 
+			b=latestFightContent.name
+			| 
+			a(href="#{latestFightContent.link}")
+				sup 
+					small.wiki (Wikipedia)
+		div.extendable
+			table
+				each value in latestFightContent.fights
+					tr
+						- if (typeof(value) === 'string') {
+						th(colspan=3)
+							b=value
+						- } else {
+						each val in value
+							td #{val}
+						- }
+	h2 Upcoming Events
+	each event in nextFightContent
+		div
+			p.extend
+				=event.date
+				|  - 
+				b=event.name
+				| 
+				a(href="#{event.link}")
+					sup 
+						small.wiki (Wikipedia)
+			div.extendable
+				table
+					each eventvalue in event.fights
+						tr
+							- if (typeof(eventvalue) === 'string') {
+							th(colspan=3)
+								b=eventvalue
+							- } else {
+							each eventval in eventvalue
+								td #{eventval}
+							- }
+					- if (event.announced) {
+						th(colspan=3)
+							i Announced bouts
+					- }
+					each bout in event.announced
+						tr
+							td(colspan=3)=bout
