@@ -1,8 +1,10 @@
 body
-	padding 50px
+	padding 20px 45px
 	font 14px "Lucida Grande", Helvetica, Arial, sans-serif
 	background #000
 	color #FFF
+h2
+	margin-top 40px
 a
 	color #FFF
 	text-decoration none
@@ -18,13 +20,20 @@ td:first-child
 
 table
 	font-size 9pt
+	
+table.hideResults
 	for i in 4..7
 		td:nth-child({i})
 			color: #000
 .heading
-	text-align center
-	padding 0
-
+	position absolute
+	top 15px
+	right 45px
 
 .extend
 	font-size 12pt
+	
+.showAll
+	margin-left 10px
+	color #999
+	cursor pointer

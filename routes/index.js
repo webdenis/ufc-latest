@@ -123,7 +123,6 @@ router.get('/', function(req, res, next) {
 				
 				theEnd++;
 				if (theEnd >= nextFightsNum) {
-					console.log(nextFightsList);
 					res.render('index', { title: 'UFC Latest', latestFightContent: latestDetails, nextFightContent: nextFightsList });	
 				}
 				

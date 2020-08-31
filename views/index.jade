@@ -12,8 +12,9 @@ block content
 			a(href="#{latestFightContent.link}")
 				sup 
 					small.wiki (Wikipedia)
+			span.showAll(onclick="showResults(this)") Show results
 		div.extendable
-			table
+			table#pastEvent.hideResults
 				each value in latestFightContent.fights
 					tr
 						- if (typeof(value) === 'string') {
