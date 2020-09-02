@@ -53,11 +53,14 @@ router.get('/', function(req, res, next) {
 				latestDetails.fights.push(th.text);
 			} else {
 				let td = trChildren[i].querySelectorAll('td');
+
 				if (td && td.length == 8) {
 					let rand = (Math.random() >= 0.5);
 					// columns: weight, name, result, name, method of win, round, round time
 					//            0      1      2      3          4          5        6
-					let newFight = {weight: td[0].text, first: rand ? td[1].text : td[3].text, second: rand ? td[3].text : td[1].text, method: td[4].text, round: td[5].text, roundtime: td[6].text, winner: 'win. '+td[1].text};
+					let firstLink = td[1].querySelector('a') ? WIKI_BASE_URL + td[1].querySelector('a').getAttribute('href') : null;
+					let secondLink = td[3].querySelector('a') ? WIKI_BASE_URL + td[3].querySelector('a').getAttribute('href') : null;
+					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink], method: td[4].text, round: td[5].text, roundtime: td[6].text, winner: 'win. '+td[1].text};
 					latestDetails.fights.push(newFight);
 				}
 			}
@@ -107,16 +110,46 @@ router.get('/', function(req, res, next) {
 							let rand = (Math.random() >= 0.5);
 							// columns: weight, name, result, name, method of win, round, round time
 							//            0      1      2      3          4          5        6
-							let newFight = {weight: td[0].text, first: rand ? td[1].text : td[3].text, second: rand ? td[3].text : td[1].text};
+							let firstLink = td[1].querySelector('a') ? WIKI_BASE_URL + td[1].querySelector('a').getAttribute('href') : null;
+							let secondLink = td[3].querySelector('a') ? WIKI_BASE_URL + td[3].querySelector('a').getAttribute('href') : null;
+							let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink]};
 							event.fights.push(newFight);
 						}
 					}
 				}
 				
 				let bouts = rootB.querySelectorAll('ul')[1];
+
 				let eachBout = bouts.querySelectorAll('li');
 				for (let m = 0; m < eachBout.length; m++) {
-					event.announced.push(eachBout[m].text.replace(' bout','').split('[')[0]);
+
+					let bout = eachBout[m].text.replace(' bout','').split('[')[0];
+					let weightclass = bout.split(':')[0];
+					let fighter1 = bout.split(':')[1].split(' vs. ')[0].trim();
+					let fighter2 = bout.split(':')[1].split(' vs. ')[1].trim();
+					
+					let eachLink = eachBout[m].querySelectorAll('a');
+					let oneLink = null;
+					let twoLink = null;
+					
+					for (let l = 0; l < eachLink.length; l++) {
+
+						let title = eachLink[l].getAttribute('title');
+						/*if (title) {
+							console.log('1 TITLE = ' , title , ' includes figher 1 ' , fighter1 , ' = ' , title.includes(fighter1) , ' or TITLE = ' , fighter1 , ' = ' , title === fighter1);
+							console.log('2 TITLE = ' , title , ' includes figher 2 ' , fighter2 , ' = ' , title.includes(fighter2) , ' or TITLE = ' , fighter2 , ' = ' , title === fighter2);
+						}*/
+						if (title && (title.includes(fighter1) || title === fighter1)) {
+							oneLink = WIKI_BASE_URL + eachLink[l].getAttribute('href');
+						}
+						if (title && (title.includes(fighter2) || title === fighter2)) {
+							twoLink = WIKI_BASE_URL + eachLink[l].getAttribute('href');
+						}
+					}
+
+					/*console.log(fighter1 + ' link - ' + oneLink);
+					console.log(fighter2 + ' link - ' + twoLink);*/
+					event.announced.push([weightclass, [fighter1, oneLink], [fighter2, twoLink]]);
 				}
 				
 				//}

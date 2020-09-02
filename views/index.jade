@@ -22,7 +22,14 @@ block content
 							b=value
 						- } else {
 						each val in value
-							td #{val}
+							- if (typeof(val) === 'string') {
+								td #{val}
+							- } else if (typeof(val) === 'object' && val[1]) {
+								td 
+									a(href="#{val[1]}",target="_blank") #{val[0]}
+							- } else {
+								td #{val[0]}
+							- }
 						- }
 	h2 Upcoming Events
 	each event in nextFightContent
@@ -44,7 +51,14 @@ block content
 								b=eventvalue
 							- } else {
 							each eventval in eventvalue
-								td #{eventval}
+								- if (typeof(eventval) === 'string') {
+									td #{eventval}
+								- } else if (typeof(eventval) === 'object' && eventval[1]) {
+									td 
+										a(href="#{eventval[1]}",target="_blank") #{eventval[0]}
+								- } else {
+									td #{eventval[0]}
+								- }
 							- }
 					- if (event.announced) {
 						th(colspan=3)
@@ -52,4 +66,17 @@ block content
 					- }
 					each bout in event.announced
 						tr
-							td(colspan=3)=bout
+							td
+								=bout[0]
+							td
+								- if (typeof(bout[1]) === 'object' && bout[1][1]) {
+									a(href="#{bout[1][1]}",target="_blank") #{bout[1][0]}
+								- } else {
+									=bout[1][0]
+								- }
+							td
+								- if (typeof(bout[2]) === 'object' && bout[2][1]) {
+									a(href="#{bout[2][1]}",target="_blank") #{bout[2][0]}
+								- } else {
+									=bout[2][0]
+								- }

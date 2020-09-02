@@ -11,16 +11,21 @@ a {
   color: #fff;
   text-decoration: none;
 }
+a:hover {
+  color: #ccc;
+  text-decoration: underline;
+}
 th {
   padding: 8px;
+  text-align: left;
 }
 td {
   padding: 2px 8px;
   transition: color 0.5s ease;
 }
 td:first-child {
-  padding-right: 100px;
   color: #9b99c1;
+  padding-right: 100px;
 }
 .wiki {
   margin-left: 5px;
