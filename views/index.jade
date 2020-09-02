@@ -3,7 +3,7 @@ extends layout
 block content
 	h1.heading=title
 	h2 Latest Event
-	div
+	div(id="#{latestFightContent.date.replace(/ /g,'')}")
 		p.extend
 			=latestFightContent.date
 			|  - 
@@ -12,7 +12,8 @@ block content
 			a(href="#{latestFightContent.link}")
 				sup 
 					small.wiki (Wikipedia)
-			span.showAll(onclick="showResults(this)") Show results
+			span.showAll(onclick="showResults(this)") [Show results]
+			span.showAll(onclick="loadRecords(this, '#{latestFightContent.date.replace(/ /g,'')}')") [Load fighters records]
 		div.extendable
 			table#pastEvent.hideResults
 				each value in latestFightContent.fights
@@ -26,14 +27,17 @@ block content
 								td #{val}
 							- } else if (typeof(val) === 'object' && val[1]) {
 								td 
-									a(href="#{val[1]}",target="_blank") #{val[0]}
+									a(href="#{val[1]}",target="_blank") #{val[0]} 
+									sup
+										a(class="getRecord",onclick="getRecord('#{val[1].replace('https://en.wikipedia.org/wiki/','')}', this)")
+											[?]
 							- } else {
 								td #{val[0]}
 							- }
 						- }
 	h2 Upcoming Events
 	each event in nextFightContent
-		div
+		div(id="#{event.date.replace(/ /g,'')}")
 			p.extend
 				=event.date
 				|  - 
@@ -42,6 +46,7 @@ block content
 				a(href="#{event.link}")
 					sup 
 						small.wiki (Wikipedia)
+				span.showAll(onclick="loadRecords(this, '#{event.date.replace(/ /g,'')}')") [Load fighters records]
 			div.extendable
 				table
 					each eventvalue in event.fights
@@ -55,7 +60,10 @@ block content
 									td #{eventval}
 								- } else if (typeof(eventval) === 'object' && eventval[1]) {
 									td 
-										a(href="#{eventval[1]}",target="_blank") #{eventval[0]}
+										a(href="#{eventval[1]}",target="_blank") #{eventval[0]} 
+										sup
+											a(class="getRecord",onclick="getRecord('#{eventval[1].replace('https://en.wikipedia.org/wiki/','')}', this)")
+												[?]
 								- } else {
 									td #{eventval[0]}
 								- }
@@ -70,13 +78,19 @@ block content
 								=bout[0]
 							td
 								- if (typeof(bout[1]) === 'object' && bout[1][1]) {
-									a(href="#{bout[1][1]}",target="_blank") #{bout[1][0]}
+									a(href="#{bout[1][1]}",target="_blank") #{bout[1][0]} 
+									sup
+										a(class="getRecord",onclick="getRecord('#{bout[1][1].replace('https://en.wikipedia.org/wiki/','')}', this)")
+											[?]
 								- } else {
 									=bout[1][0]
 								- }
 							td
 								- if (typeof(bout[2]) === 'object' && bout[2][1]) {
-									a(href="#{bout[2][1]}",target="_blank") #{bout[2][0]}
+									a(href="#{bout[2][1]}",target="_blank") #{bout[2][0]} 
+									sup
+										a(class="getRecord",onclick="getRecord('#{bout[2][1].replace('https://en.wikipedia.org/wiki/','')}', this)")
+											[?]
 								- } else {
 									=bout[2][0]
 								- }

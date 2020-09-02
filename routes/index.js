@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-//import pkg from 'node-html-parser';
 const pkg = require('node-html-parser');
 const { parse } = pkg;
 

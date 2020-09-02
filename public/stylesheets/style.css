@@ -58,3 +58,9 @@ table.hideResults td:nth-child(7) {
   color: #999;
   cursor: pointer;
 }
+.getRecord {
+  cursor: pointer;
+}
+sup a {
+  font-weight: bold;
+}
