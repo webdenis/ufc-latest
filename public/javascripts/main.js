@@ -1,33 +1,28 @@
-var HttpClient = function() {
-    this.get = function(aUrl, aCallback) {
-        var anHttpRequest = new XMLHttpRequest();
-        anHttpRequest.onreadystatechange = function() { 
-            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-                aCallback(anHttpRequest.responseText);
-        }
-
-        anHttpRequest.open( "GET", aUrl, true );            
-        anHttpRequest.send( null );
-    }
-}
-
 function showResults(e) {
 	e.innerHTML = (e.innerHTML == '[Show results]') ? '[Hide results]' : '[Show results]';
 	if (e.innerHTML == '[Show results]') {
 		document.getElementById("pastEvent").classList.add("hideResults");
+		let overridden = document.getElementsByClassName("whiteOverride");
+		for (let i = 0; i < overridden.length; i++) {
+			overridden[i].classList.remove('whiteOverride');
+		}
 	} else {
 		document.getElementById("pastEvent").classList.remove("hideResults");
+		let overridden = document.getElementsByClassName("blackOverride");
+		for (let i = 0; i < overridden.length; i++) {
+			overridden[i].classList.remove('blackOverride');
+		}
 	}
 }
 
 async function getRecord(url, e) {
 	let response = await fetch('/getRecord/' + url);
-	let data = await response.text()
+	let data = await response.json()
 	
-	console.log(e);
-	e.innerHTML = data;
+	e.innerHTML = data.fighterRecord;
 	e.removeAttribute("onclick");
-	e.classList.remove('getRecord');
+	e.classList.remove("getRecord");
+	e.setAttribute("title", data.recordDetails);
 	return false;
 }
 

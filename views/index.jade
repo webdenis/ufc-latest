@@ -19,8 +19,13 @@ block content
 				each value in latestFightContent.fights
 					tr
 						- if (typeof(value) === 'string') {
-						th(colspan=3)
-							b=value
+							- if (!value.includes('Winner')) {
+							th(colspan=3)
+								b=value
+							- } else {
+							td(colspan=3,class='fightResult')
+								=value
+							- }
 						- } else {
 						each val in value
 							- if (typeof(val) === 'string') {

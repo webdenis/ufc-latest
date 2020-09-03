@@ -24,11 +24,6 @@ td:first-child
 	margin-left 5px
 table
 	font-size 9pt
-
-table.hideResults
-	for i in 4..7
-		td:nth-child({i})
-			color: #000
 .heading
 	position absolute
 	top 15px
@@ -43,3 +38,11 @@ table.hideResults
 	cursor pointer
 sup a
 	font-weight bold
+	cursor help
+.fightResult
+	text-align center
+	color #eee !important
+	padding-right 0 !important
+	font-size 8pt
+.hideResults .fightResult
+	color #000 !important

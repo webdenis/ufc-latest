@@ -24,9 +24,28 @@ router.get('/', function(req, res, next) {
 	
 	let record = '[' + breakdown[2].text.split(' ')[0] + ' - ' + breakdown[3].text.split(' ')[0] + ']';
 	
-	res.send(record);
+	let detailsArray = [];
+	let comaOrDash = true;
 	
-	console.log('Record fetched: ' + record);
+	for (let i = 4; i < 20; i++) {
+		if (breakdown[i]) {
+			detailsArray.push(breakdown[i].text);
+			if (breakdown[i].text.length > 3) {
+				detailsArray.push(': ');
+			} else {
+				detailsArray.push(comaOrDash ? ' - ' : ', ');
+				comaOrDash = !comaOrDash;
+			}
+		}
+	}
+	
+	details = detailsArray.join('');
+	
+	details = details.replace(/\n/g, '').slice(0, -2);
+	
+	res.json({fighterRecord: record, recordDetails: details});
+	
+	console.log('Record fetched: ' + record + ' ' + details);
 	
   });
   

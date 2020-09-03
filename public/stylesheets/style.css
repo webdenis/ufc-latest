@@ -33,18 +33,6 @@ td:first-child {
 table {
   font-size: 9pt;
 }
-table.hideResults td:nth-child(4) {
-  color: #000;
-}
-table.hideResults td:nth-child(5) {
-  color: #000;
-}
-table.hideResults td:nth-child(6) {
-  color: #000;
-}
-table.hideResults td:nth-child(7) {
-  color: #000;
-}
 .heading {
   position: absolute;
   top: 15px;
@@ -63,4 +51,14 @@ table.hideResults td:nth-child(7) {
 }
 sup a {
   font-weight: bold;
+  cursor: help;
+}
+.fightResult {
+  text-align: center;
+  color: #eee !important;
+  padding-right: 0 !important;
+  font-size: 8pt;
+}
+.hideResults .fightResult {
+  color: #000 !important;
 }

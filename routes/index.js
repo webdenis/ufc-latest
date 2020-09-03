@@ -59,8 +59,13 @@ router.get('/', function(req, res, next) {
 					//            0      1      2      3          4          5        6
 					let firstLink = td[1].querySelector('a') ? WIKI_BASE_URL + td[1].querySelector('a').getAttribute('href') : null;
 					let secondLink = td[3].querySelector('a') ? WIKI_BASE_URL + td[3].querySelector('a').getAttribute('href') : null;
-					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink], method: td[4].text, round: td[5].text, roundtime: td[6].text, winner: 'win. '+td[1].text};
+					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink]};
+					
 					latestDetails.fights.push(newFight);
+					
+					let newFightResult = 'Winner: ' + td[1].text + ' by ' + td[4].text + ' at ' + 'r. ' + td[5].text + ', ' + td[6].text;
+					
+					latestDetails.fights.push(newFightResult);
 				}
 			}
 		}
