@@ -63,7 +63,7 @@ router.get('/', function(req, res, next) {
 					
 					latestDetails.fights.push(newFight);
 					
-					let newFightResult = 'Winner: ' + td[1].text + ' by ' + td[4].text + ' at ' + 'r. ' + td[5].text + ', ' + td[6].text;
+					let newFightResult = 'Winner: ' + td[1].text + ' by ' + td[4].text + ( td[4].text.includes('Decision') ? '' : ' at ' + 'r. ' + td[5].text + ', ' + td[6].text);
 					
 					latestDetails.fights.push(newFightResult);
 				}
