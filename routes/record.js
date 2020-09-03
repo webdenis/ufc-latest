@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
 	
 	var breakdown = infobox.querySelectorAll('td');
 	
-	let record = '[' + breakdown[2].text.split(' ')[0] + ' - ' + breakdown[3].text.split(' ')[0] + ']';
+	let record = '[' + breakdown[2].text.split(' ')[0] + ' - ' + breakdown[3].text.split(' ')[0] + ']';
 	
 	let detailsArray = [];
 	let comaOrDash = true;
