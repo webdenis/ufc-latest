@@ -4,7 +4,7 @@ block content
 	h1.heading=title
 	h2 Latest Event
 	div(id="#{latestFightContent.date.replace(/ /g,'')}")
-		p.extend
+		p
 			=latestFightContent.date
 			|  - 
 			b=latestFightContent.name
@@ -14,7 +14,7 @@ block content
 					small.wiki (Wikipedia)
 			span.showAll(onclick="showResults(this)") [Show results]
 			span.showAll(onclick="loadRecords(this, '#{latestFightContent.date.replace(/ /g,'')}')") [Load fighters records]
-		div.extendable
+		div
 			table#pastEvent.hideResults
 				each value in latestFightContent.fights
 					tr
@@ -35,7 +35,7 @@ block content
 									a(href="#{val[1]}",target="_blank") #{val[0]} 
 									sup
 										a(class="getRecord",onclick="getRecord('#{val[1].replace('https://en.wikipedia.org/wiki/','')}', this)")
-											[?]
+											| [?]
 							- } else {
 								td #{val[0]}
 							- }
@@ -68,7 +68,7 @@ block content
 										a(href="#{eventval[1]}",target="_blank") #{eventval[0]} 
 										sup
 											a(class="getRecord",onclick="getRecord('#{eventval[1].replace('https://en.wikipedia.org/wiki/','')}', this)")
-												[?]
+												| [?]
 								- } else {
 									td #{eventval[0]}
 								- }
@@ -86,7 +86,7 @@ block content
 									a(href="#{bout[1][1]}",target="_blank") #{bout[1][0]} 
 									sup
 										a(class="getRecord",onclick="getRecord('#{bout[1][1].replace('https://en.wikipedia.org/wiki/','')}', this)")
-											[?]
+											| [?]
 								- } else {
 									=bout[1][0]
 								- }
@@ -95,7 +95,7 @@ block content
 									a(href="#{bout[2][1]}",target="_blank") #{bout[2][0]} 
 									sup
 										a(class="getRecord",onclick="getRecord('#{bout[2][1].replace('https://en.wikipedia.org/wiki/','')}', this)")
-											[?]
+											| [?]
 								- } else {
 									=bout[2][0]
 								- }

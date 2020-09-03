@@ -1,6 +1,6 @@
 body {
   padding: 20px 45px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: Calibri;
   background: #000;
   color: #fff;
 }
@@ -30,16 +30,10 @@ td:first-child {
 .wiki {
   margin-left: 5px;
 }
-table {
-  font-size: 9pt;
-}
 .heading {
   position: absolute;
   top: 15px;
   right: 45px;
-}
-.extend {
-  font-size: 12pt;
 }
 .showAll {
   margin-left: 10px;
@@ -57,7 +51,6 @@ sup a {
   text-align: center;
   color: #eee !important;
   padding-right: 0 !important;
-  font-size: 8pt;
 }
 .hideResults .fightResult {
   color: #000 !important;
