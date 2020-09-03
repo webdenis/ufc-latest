@@ -56,7 +56,11 @@ sup a {
   color: #000 !important;
 }
 @media (max-width: 480px) {
+  body {
+    padding: 5px;
+  }
   table {
     width: 100%;
+    border: 1px solid #fff;
   }
 }
