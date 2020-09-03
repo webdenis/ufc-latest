@@ -55,3 +55,8 @@ sup a {
 .hideResults .fightResult {
   color: #000 !important;
 }
+@media (max-width: 480px) {
+  table {
+    width: 100%;
+  }
+}
