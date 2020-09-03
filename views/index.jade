@@ -73,7 +73,7 @@ block content
 									td #{eventval[0]}
 								- }
 							- }
-					- if (event.announced) {
+					- if (event.announced && event.announced.length > 0) {
 						th(colspan=3)
 							i Announced bouts
 					- }

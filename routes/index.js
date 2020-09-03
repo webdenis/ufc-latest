@@ -123,39 +123,41 @@ router.get('/', function(req, res, next) {
 				}
 				
 				let bouts = rootB.querySelectorAll('ul')[1];
+				
+				if (bouts.toString().includes('bout:')) {
+					let eachBout = bouts.querySelectorAll('li');
+					for (let m = 0; m < eachBout.length; m++) {
 
-				let eachBout = bouts.querySelectorAll('li');
-				for (let m = 0; m < eachBout.length; m++) {
+						let bout = eachBout[m].text.replace(' bout','').split('[')[0];
+						let weightclass = bout.split(':')[0];
+						let fighter1 = bout.split(':')[1].split(' vs. ')[0].trim();
+						let fighter2 = bout.split(':')[1].split(' vs. ')[1].trim();
+						
+						let eachLink = eachBout[m].querySelectorAll('a');
+						let oneLink = null;
+						let twoLink = null;
+						
+						for (let l = 0; l < eachLink.length; l++) {
 
-					let bout = eachBout[m].text.replace(' bout','').split('[')[0];
-					let weightclass = bout.split(':')[0];
-					let fighter1 = bout.split(':')[1].split(' vs. ')[0].trim();
-					let fighter2 = bout.split(':')[1].split(' vs. ')[1].trim();
-					
-					let eachLink = eachBout[m].querySelectorAll('a');
-					let oneLink = null;
-					let twoLink = null;
-					
-					for (let l = 0; l < eachLink.length; l++) {
-
-						let title = eachLink[l].getAttribute('title');
-						/*if (title) {
-							console.log('1 TITLE = ' , title , ' includes figher 1 ' , fighter1 , ' = ' , title.includes(fighter1) , ' or TITLE = ' , fighter1 , ' = ' , title === fighter1);
-							console.log('2 TITLE = ' , title , ' includes figher 2 ' , fighter2 , ' = ' , title.includes(fighter2) , ' or TITLE = ' , fighter2 , ' = ' , title === fighter2);
-						}*/
-						if (title && (title.includes(fighter1) || title === fighter1)) {
-							oneLink = WIKI_BASE_URL + eachLink[l].getAttribute('href');
+							let title = eachLink[l].getAttribute('title');
+							/*if (title) {
+								console.log('1 TITLE = ' , title , ' includes figher 1 ' , fighter1 , ' = ' , title.includes(fighter1) , ' or TITLE = ' , fighter1 , ' = ' , title === fighter1);
+								console.log('2 TITLE = ' , title , ' includes figher 2 ' , fighter2 , ' = ' , title.includes(fighter2) , ' or TITLE = ' , fighter2 , ' = ' , title === fighter2);
+							}*/
+							if (title && (title.includes(fighter1) || title === fighter1)) {
+								oneLink = WIKI_BASE_URL + eachLink[l].getAttribute('href');
+							}
+							if (title && (title.includes(fighter2) || title === fighter2)) {
+								twoLink = WIKI_BASE_URL + eachLink[l].getAttribute('href');
+							}
 						}
-						if (title && (title.includes(fighter2) || title === fighter2)) {
-							twoLink = WIKI_BASE_URL + eachLink[l].getAttribute('href');
-						}
+
+						/*console.log(fighter1 + ' link - ' + oneLink);
+						console.log(fighter2 + ' link - ' + twoLink);*/
+						event.announced.push([weightclass, [fighter1, oneLink], [fighter2, twoLink]]);
+					}
 					}
 
-					/*console.log(fighter1 + ' link - ' + oneLink);
-					console.log(fighter2 + ' link - ' + twoLink);*/
-					event.announced.push([weightclass, [fighter1, oneLink], [fighter2, twoLink]]);
-				}
-				
 				//}
 				
 				theEnd++;
