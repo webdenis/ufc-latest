@@ -55,7 +55,7 @@ sup a {
 .hideResults .fightResult {
   color: #000 !important;
 }
-@media (max-width: 480px) {
+@media (max-width: 1080px) {
   body {
     padding: 5px;
   }
