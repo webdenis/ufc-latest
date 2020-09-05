@@ -5,7 +5,7 @@ body {
   color: #fff;
 }
 h2 {
-  margin-top: 40px;
+  margin-top: 30px;
 }
 a {
   color: #fff;
@@ -72,4 +72,8 @@ sup a {
   .fightResult {
     font-size: 1.2rem;
   }
+}
+.hidden p > *:not(.donthide),
+.hidden > *:not(.donthide) {
+  display: none;
 }

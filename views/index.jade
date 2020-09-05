@@ -3,17 +3,19 @@ extends layout
 block content
 	h1.heading=title
 	h2 Latest Event
-	div(id="#{latestFightContent.date.replace(/ /g,'')}")
-		p
-			=latestFightContent.date
-			|  - 
-			b=latestFightContent.name
-			| 
-			a(href="#{latestFightContent.link}")
-				sup 
-					small.wiki (Wikipedia)
+	div(id="#{latestFightContent.date.replace(/ /g,'')}",class="pastEventDiv")
+		p.donthide
+			span.donthide
+				=latestFightContent.date
+				|  - 
+				b=latestFightContent.name
+				| 
+				a(href="#{latestFightContent.link}")
+					sup 
+						small.wiki (Wikipedia)
 			span.showAll(onclick="showResults(this)") [Show results]
 			span.showAll(onclick="loadRecords(this, '#{latestFightContent.date.replace(/ /g,'')}')") [Load fighters records]
+			span.hidePast.showAll.donthide(onclick="hidePast(this, '#{latestFightContent.date.replace(/ /g,'')}')") [Hide]
 		div
 			table#pastEvent.hideResults
 				each value in latestFightContent.fights

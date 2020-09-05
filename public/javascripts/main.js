@@ -1,3 +1,12 @@
+const COOKIE_VAR = 'pastEventHidden_';
+
+function loaded() {
+	let id = document.getElementsByClassName("pastEventDiv")[0].id;
+	if (Cookies.get(COOKIE_VAR + id)) {
+		document.getElementsByClassName("hidePast")[0].click();
+	}
+}
+
 function showResults(e) {
 	e.innerHTML = (e.innerHTML == '[Show results]') ? '[Hide results]' : '[Show results]';
 	if (e.innerHTML == '[Show results]') {
@@ -33,4 +42,18 @@ function loadRecords(e, cont) {
 	   records[i].click();
 	}
 	e.remove();
+}
+
+function hidePast(e, cont) {
+	
+	e.innerHTML = (e.innerHTML == '[Hide]') ? '[Show]' : '[Hide]';
+	
+	let container = document.getElementById(cont);
+	if (container.classList.contains('hidden')) {
+		container.classList.remove('hidden');
+		Cookies.remove(COOKIE_VAR + cont);
+	} else {
+		container.classList.add('hidden');
+		Cookies.set(COOKIE_VAR + cont, '1', { expires: 8, sameSite: 'None', Secure: true });
+	}
 }
