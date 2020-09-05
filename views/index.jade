@@ -4,7 +4,7 @@ block content
 	h1.heading=title
 	h2 Latest Event
 	div(id="#{latestFightContent.date.replace(/ /g,'')}",class="pastEventDiv")
-		p.donthide
+		p.donthide.paddedT
 			span.donthide
 				=latestFightContent.date
 				|  - 
@@ -16,7 +16,7 @@ block content
 			span.showAll(onclick="showResults(this)") [Show results]
 			span.showAll(onclick="loadRecords(this, '#{latestFightContent.date.replace(/ /g,'')}')") [Load fighters records]
 			span.hidePast.showAll.donthide(onclick="hidePast(this, '#{latestFightContent.date.replace(/ /g,'')}')") [Hide]
-		div
+		div.padded
 			table#pastEvent.hideResults
 				each value in latestFightContent.fights
 					tr
@@ -45,7 +45,7 @@ block content
 	h2 Upcoming Events
 	each event in nextFightContent
 		div(id="#{event.date.replace(/ /g,'')}")
-			p.extend
+			p.paddedT
 				=event.date
 				|  - 
 				b=event.name
@@ -54,7 +54,7 @@ block content
 					sup 
 						small.wiki (Wikipedia)
 				span.showAll(onclick="loadRecords(this, '#{event.date.replace(/ /g,'')}')") [Load fighters records]
-			div.extendable
+			div.padded
 				table
 					each eventvalue in event.fights
 						tr
