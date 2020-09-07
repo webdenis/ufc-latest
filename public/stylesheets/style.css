@@ -31,6 +31,10 @@ td:first-child {
   position: absolute;
   top: 15px;
   right: 45px;
+  text-align: right;
+}
+.heading h3 a {
+  cursor: pointer;
 }
 .showAll {
   margin-left: 10px;
@@ -53,6 +57,23 @@ sup a {
 .hideResults .fightResult {
   color: #000 !important;
 }
+.hidden p > *:not(.donthide),
+.hidden > *:not(.donthide) {
+  display: none;
+}
+.hide {
+  display: none;
+}
+.padded {
+  padding-left: 30px;
+  padding-bottom: 20px;
+}
+.paddedT {
+  padding-left: 15px;
+}
+.linet {
+  text-decoration: line-through;
+}
 @media (max-width: 1080px) {
   body {
     padding: 15px;
@@ -69,15 +90,7 @@ sup a {
   .fightResult {
     font-size: 1.2rem;
   }
-}
-.hidden p > *:not(.donthide),
-.hidden > *:not(.donthide) {
-  display: none;
-}
-.padded {
-  padding-left: 30px;
-  padding-bottom: 20px;
-}
-.paddedT {
-  padding-left: 15px;
+  h2:first-of-type {
+    margin-top: 120px;
+  }
 }

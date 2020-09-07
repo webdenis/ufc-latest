@@ -1,8 +1,17 @@
 extends layout
 
 block content
-	h1.heading=title
-	h2 Latest Event
+	div.heading
+		h1=title
+		h3
+			a(onclick="toggleSettings()") Settings
+		div.settings.hide
+			span Autoload fighter records for one next event
+			input#autoloadNextEventRecords(type='checkbox',checked=false,onclick="toggleSetting('autoloadNextEventRecords')")
+			br
+			span Autoload fighter records for all next events
+			input#autoloadNextEventRecordsAll(type='checkbox',checked=false,onclick="toggleSetting('autoloadNextEventRecordsAll')")
+	h2 Latest event
 	div(id="#{latestFightContent.date.replace(/ /g,'')}",class="pastEventDiv")
 		p.donthide.paddedT
 			span.donthide
@@ -42,9 +51,9 @@ block content
 								td #{val[0]}
 							- }
 						- }
-	h2 Upcoming Events
+	h2 Upcoming events
 	each event in nextFightContent
-		div(id="#{event.date.replace(/ /g,'')}")
+		div(id="#{event.date.replace(/ /g,'')}",class="newEventDiv")
 			p.paddedT
 				=event.date
 				|  - 

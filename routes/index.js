@@ -55,8 +55,7 @@ router.get('/', function(req, res, next) {
 
 				if (td && td.length == 8) {
 					let rand = (Math.random() >= 0.5);
-					// columns: weight, name, result, name, method of win, round, round time
-					//            0      1      2      3          4          5        6
+
 					let firstLink = td[1].querySelector('a') ? WIKI_BASE_URL + td[1].querySelector('a').getAttribute('href') : null;
 					let secondLink = td[3].querySelector('a') ? WIKI_BASE_URL + td[3].querySelector('a').getAttribute('href') : null;
 					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink]};
