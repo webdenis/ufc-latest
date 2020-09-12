@@ -9,7 +9,6 @@ function loaded() {
 	if (Cookies.get('autoloadNextEventRecordsAll')) {
 		document.getElementById('autoloadNextEventRecordsAll').checked = true;
 		
-		// load records if true
 		let divs = document.getElementsByClassName('newEventDiv');
 		for (let i = 0; i < divs.length; i++) {
 			divs[i].querySelector('.showAll').click();
@@ -22,9 +21,10 @@ function loaded() {
 	if (Cookies.get('autoloadNextEventRecords') && !Cookies.get('autoloadNextEventRecordsAll')) {
 		document.getElementById('autoloadNextEventRecords').checked = true;
 		
-		// load records if true
 		document.getElementsByClassName('newEventDiv')[0].querySelector('.showAll').click();
 	}
+
+	document.getElementById('nextEventsNumber').value = Cookies.get('nextEventsNumber') ? parseInt(Cookies.get('nextEventsNumber')) : 4;
 
 }
 
@@ -45,8 +45,10 @@ async function getRecord(url, e) {
 	//ranking
 	let a = e.parentNode.parentNode.querySelector('a');
 	if (data.ranking) {
-		if (!a.innerHTML.includes('(c)')) {
+		if (!a.innerHTML.includes('(c)') && !a.innerHTML.includes('(ic)')) {
 			a.innerHTML = '<sup>#'+data.ranking+'</sup> ' + a.innerHTML;
+		} else if (a.innerHTML.includes('(ic)')) {
+			a.innerHTML = '<sup>#IC</sup> ' + a.innerHTML.replace(' (ic)','');
 		} else {
 			a.innerHTML = '<sup>#C</sup> ' + a.innerHTML.replace(' (c)','');
 		}
@@ -92,5 +94,21 @@ function toggleSetting(setting) {
 	} else {
 		document.getElementById('autoloadNextEventRecords').disabled = false;
 		document.getElementById('autoloadNextEventRecords').previousSibling.classList.remove('linet');
+	}
+}
+
+function changeSetting(setting, val) {
+	switch(setting) {
+		case 'nextEventsNumber':
+			val = parseInt(val);
+			if (val >= 1 && val <= 10) {
+				Cookies.set(setting, val, { expires: 365, sameSite: 'None', Secure: true });
+			} else {
+				alert('This value should be between 0 and 10.');
+				document.getElementById('nextEventsNumber').value = (Cookies.get(setting) ? Cookies.get(setting) : 4);
+			}
+			break;
+		default:
+			return;
 	}
 }

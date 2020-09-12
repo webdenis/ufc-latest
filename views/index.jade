@@ -11,6 +11,9 @@ block content
 			br
 			span Autoload fighter records for all next events
 			input#autoloadNextEventRecordsAll(type='checkbox',checked=false,onclick="toggleSetting('autoloadNextEventRecordsAll')")
+			br
+			span Number of next events to load (1-10)
+			input#nextEventsNumber(type='text',oninput="changeSetting('nextEventsNumber', this.value)")
 	h2 Latest event
 	div(id="#{latestFightContent.date.replace(/ /g,'')}",class="pastEventDiv")
 		p.donthide.paddedT
@@ -31,11 +34,11 @@ block content
 					tr
 						- if (typeof(value) === 'string') {
 							- if (!value.includes('Winner')) {
-							th(colspan=3)
-								b=value
+								th(colspan=3)
+									b=value
 							- } else {
-							td(colspan=3,class='fightResult')
-								=value
+								td(colspan=3,class='fightResult')
+									=value
 							- }
 						- } else {
 						each val in value

@@ -9,13 +9,22 @@ const { JSDOM } = jsdom;
 
 const async = require("async");
 
-const nextFightsNum = 4; // Number of next fights to generate
+var nextFightsNum = 4; // Number of next fights to generate (default)
 const WIKI_BASE_URL = 'https://en.wikipedia.org';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	
   console.log('Starting..');
+  
+  console.log('Cookies: ', req.cookies);
+  
+  if (req.cookies.nextEventsNumber) {
+	  let nen = parseInt(req.cookies.nextEventsNumber);
+	  if (nen >= 1 && nen <= 10) {
+		  nextFightsNum = nen;
+	  }
+  }
 
   JSDOM.fromURL(WIKI_BASE_URL + "/wiki/List_of_UFC_events").then(dom => {
 	
@@ -75,10 +84,11 @@ router.get('/', function(req, res, next) {
 		let children = tables[0].querySelectorAll('tbody')[0].childNodes;
 		
 		var nextFightsList = [];
+		
+		console.log('bitch - ' + nextFightsNum);
 
 		for (let i = children.length; i >= children.length - nextFightsNum * 2; i--) {
 			if (children[i] && children[i].toString().length > 10) {
-				//nextFights += children[i].toString();
 				nextFightsList.push({
 					link: WIKI_BASE_URL + children[i].querySelectorAll('a')[0].getAttribute('href'),
 					name: children[i].querySelectorAll('a')[0].text,
@@ -100,23 +110,25 @@ router.get('/', function(req, res, next) {
 				
 				var tableB = rootB.querySelector('.toccolours');
 				
-				let trChildren = tableB.querySelectorAll('tr');
+				if (tableB) {
+					let trChildren = tableB.querySelectorAll('tr');
 				
-				for (let i = 0; i < trChildren.length; i++) {
-					let th = trChildren[i].querySelector('th');
-					if (th && th.getAttribute('colspan') == 8) {
-						event.fights.push(th.text);
-					} else {
-						let td = trChildren[i].querySelectorAll('td');
-						
-						if (td && td.length == 8) {
-							let rand = (Math.random() >= 0.5);
-							// columns: weight, name, result, name, method of win, round, round time
-							//            0      1      2      3          4          5        6
-							let firstLink = td[1].querySelector('a') ? WIKI_BASE_URL + td[1].querySelector('a').getAttribute('href') : null;
-							let secondLink = td[3].querySelector('a') ? WIKI_BASE_URL + td[3].querySelector('a').getAttribute('href') : null;
-							let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink]};
-							event.fights.push(newFight);
+					for (let i = 0; i < trChildren.length; i++) {
+						let th = trChildren[i].querySelector('th');
+						if (th && th.getAttribute('colspan') == 8) {
+							event.fights.push(th.text);
+						} else {
+							let td = trChildren[i].querySelectorAll('td');
+							
+							if (td && td.length == 8) {
+								let rand = (Math.random() >= 0.5);
+								// columns: weight, name, result, name, method of win, round, round time
+								//            0      1      2      3          4          5        6
+								let firstLink = td[1].querySelector('a') ? WIKI_BASE_URL + td[1].querySelector('a').getAttribute('href') : null;
+								let secondLink = td[3].querySelector('a') ? WIKI_BASE_URL + td[3].querySelector('a').getAttribute('href') : null;
+								let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink]};
+								event.fights.push(newFight);
+							}
 						}
 					}
 				}
