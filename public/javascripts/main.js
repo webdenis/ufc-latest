@@ -79,6 +79,10 @@ function hidePast(e, cont) {
 	}
 }
 
+function spoilFinish(e) {
+	e.parentNode.classList.remove('miniSpoiler');
+	e.remove();
+}
 
 function toggleSettings() {
 	let sDiv = document.getElementsByClassName('settings')[0];

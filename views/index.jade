@@ -41,9 +41,15 @@ block content
 									=value
 							- }
 						- } else {
-						each val in value
+						each val, index  in value
 							- if (typeof(val) === 'string') {
-								td #{val}
+								- if (index == 'method') {
+									td.miniSpoiler 
+										span(onclick="spoilFinish(this)") [ sup ]
+										=val
+								- } else {
+									td #{val}
+								- }
 							- } else if (typeof(val) === 'object' && val[1]) {
 								td 
 									a(href="#{val[1]}",target="_blank") #{val[0]} 

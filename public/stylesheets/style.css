@@ -79,6 +79,14 @@ input[type=text] {
   width: 15px;
   text-align: center;
 }
+.miniSpoiler {
+  color: #000;
+}
+.miniSpoiler span {
+  color: #fff;
+  cursor: pointer;
+  font-size: 9pt;
+}
 @media (max-width: 1080px) {
   body {
     padding: 15px;

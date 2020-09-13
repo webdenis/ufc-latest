@@ -67,7 +67,9 @@ router.get('/', function(req, res, next) {
 
 					let firstLink = td[1].querySelector('a') ? WIKI_BASE_URL + td[1].querySelector('a').getAttribute('href') : null;
 					let secondLink = td[3].querySelector('a') ? WIKI_BASE_URL + td[3].querySelector('a').getAttribute('href') : null;
-					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink]};
+					let fightResult = td[4].text.split(' (')[0];
+					let fightSpoiler = fightResult == 'KO' || fightResult == 'TKO' ? 'KO/TKO' : fightResult.substring(0,3).toUpperCase();
+					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink], method: fightSpoiler};
 					
 					latestDetails.fights.push(newFight);
 					
@@ -84,8 +86,6 @@ router.get('/', function(req, res, next) {
 		let children = tables[0].querySelectorAll('tbody')[0].childNodes;
 		
 		var nextFightsList = [];
-		
-		console.log('bitch - ' + nextFightsNum);
 
 		for (let i = children.length; i >= children.length - nextFightsNum * 2; i--) {
 			if (children[i] && children[i].toString().length > 10) {
