@@ -57,6 +57,20 @@ sup a {
 .hideResults .fightResult {
   color: #000 !important;
 }
+.hideResults .fighter {
+  color: #fff !important;
+}
+.fighter sup {
+  color: #fff !important;
+}
+.winner .fighter {
+  color: #74b374;
+  transition: color 0.5s ease;
+}
+.loser .fighter {
+  color: #c15555;
+  transition: color 0.5s ease;
+}
 .hidden p > *:not(.donthide),
 .hidden > *:not(.donthide) {
   display: none;
@@ -79,13 +93,22 @@ input[type=text] {
   width: 15px;
   text-align: center;
 }
-.miniSpoiler {
-  color: #000;
-}
-.miniSpoiler span {
+.via {
   color: #fff;
   cursor: pointer;
   font-size: 9pt;
+}
+.viaSpoiler {
+  color: #000;
+}
+.hideResults .viaDesc {
+  color: #000;
+}
+.showResults .via {
+  display: none;
+}
+.showResults .viaSpoiler {
+  color: #fff !important;
 }
 @media (max-width: 1080px) {
   body {

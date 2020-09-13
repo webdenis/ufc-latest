@@ -25,41 +25,49 @@ block content
 				a(href="#{latestFightContent.link}")
 					sup 
 						small.wiki (Wikipedia)
-			span.showAll(onclick="showResults(this)") [Show results]
+			span.showAll.showVias(onclick="showVias(this)") [Show vias]
+			span.showAll(onclick="showResults(this)") [Show full results]
 			span.showAll(onclick="loadRecords(this, '#{latestFightContent.date.replace(/ /g,'')}')") [Load fighters records]
 			span.hidePast.showAll.donthide(onclick="hidePast(this, '#{latestFightContent.date.replace(/ /g,'')}')") [Hide]
 		div.padded
 			table#pastEvent.hideResults
 				each value in latestFightContent.fights
-					tr
-						- if (typeof(value) === 'string') {
-							- if (!value.includes('Winner')) {
-								th(colspan=3)
-									b=value
-							- } else {
-								td(colspan=3,class='fightResult')
-									=value
-							- }
-						- } else {
-						each val, index  in value
-							- if (typeof(val) === 'string') {
-								- if (index == 'method') {
-									td.miniSpoiler 
-										span(onclick="spoilFinish(this)") [ sup ]
-										=val
-								- } else {
-									td #{val}
-								- }
-							- } else if (typeof(val) === 'object' && val[1]) {
-								td 
-									a(href="#{val[1]}",target="_blank") #{val[0]} 
+					- if (typeof(value) == 'string') {
+						th(colspan=4)
+							b=value
+					- } else {
+						tr
+							td
+								=value.weight
+							td(class="#{ value.first[0] == value.winner ? 'winner' : 'loser' }")
+								- if (value.first && value.first[1]) {
+									a(class="fighter",href="#{value.first[1]}",target="_blank") #{value.first[0]} 
 									sup
-										a(class="getRecord",onclick="getRecord('#{val[1].replace('https://en.wikipedia.org/wiki/','')}', this)")
+										a(class="getRecord",onclick="getRecord('#{value.first[1].replace('https://en.wikipedia.org/wiki/','')}', this)")
 											| [?]
-							- } else {
-								td #{val[0]}
-							- }
-						- }
+								- } else {
+									a(class="fighter")
+										=value.first[0]
+								- }
+							td(class="#{ value.second[0] == value.winner ? 'winner' : 'loser' }")
+								- if (value.second && value.second[1]) {
+									a(class="fighter",href="#{value.second[1]}",target="_blank") #{value.second[0]} 
+									sup
+										a(class="getRecord",onclick="getRecord('#{value.second[1].replace('https://en.wikipedia.org/wiki/','')}', this)")
+											| [?]
+								- } else {
+									a(class="fighter")
+										=value.second[0]
+								- }
+							td.miniSpoiler
+								span.via(onclick="spoilFinish(this)") [ via ]
+								span.viaSpoiler
+									=value.method
+								| 
+								span.viaDesc
+									=value.methodDesc
+					- }
+
 	h2 Upcoming events
 	each event in nextFightContent
 		div(id="#{event.date.replace(/ /g,'')}",class="newEventDiv")

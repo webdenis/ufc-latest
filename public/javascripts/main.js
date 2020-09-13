@@ -29,8 +29,13 @@ function loaded() {
 }
 
 function showResults(e) {
-	e.innerHTML = (e.innerHTML == '[Show results]') ? '[Hide results]' : '[Show results]';
-	document.getElementById("pastEvent").classList.toggle("hideResults");
+	e.remove();
+	let pastEvent = document.getElementById("pastEvent");
+	
+	pastEvent.classList.remove("hideResults");
+	pastEvent.classList.add("showResults");
+	
+	document.getElementsByClassName("showVias")[0].remove();
 }
 
 async function getRecord(url, e) {
@@ -44,6 +49,7 @@ async function getRecord(url, e) {
 	
 	//ranking
 	let a = e.parentNode.parentNode.querySelector('a');
+	console.log(a);
 	if (data.ranking) {
 		if (!a.innerHTML.includes('(c)') && !a.innerHTML.includes('(ic)')) {
 			a.innerHTML = '<sup>#'+data.ranking+'</sup> ' + a.innerHTML;
@@ -81,6 +87,16 @@ function hidePast(e, cont) {
 
 function spoilFinish(e) {
 	e.parentNode.classList.remove('miniSpoiler');
+	e.parentNode.classList.add('showResults');
+	e.remove();
+}
+
+function showVias(e) {
+	let pastEvent = document.getElementById("pastEvent");
+	let tds = pastEvent.getElementsByTagName("td");
+	for (var i = 0; i < tds.length; i++) {
+	   tds[i].classList.add('showResults');
+	}
 	e.remove();
 }
 

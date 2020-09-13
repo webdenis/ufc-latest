@@ -69,13 +69,11 @@ router.get('/', function(req, res, next) {
 					let secondLink = td[3].querySelector('a') ? WIKI_BASE_URL + td[3].querySelector('a').getAttribute('href') : null;
 					let fightResult = td[4].text.split(' (')[0];
 					let fightSpoiler = fightResult == 'KO' || fightResult == 'TKO' ? 'KO/TKO' : fightResult.substring(0,3).toUpperCase();
-					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink], method: fightSpoiler};
+					let fightSpoilerDesc = '(' + td[4].text.split(' (')[1] + (td[4].text.includes('Decision') ? '' : ' at ' + 'r. ' + td[5].text + ', ' + td[6].text);
+					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink], method: fightSpoiler, methodDesc: fightSpoilerDesc, winner: td[1].text};
 					
 					latestDetails.fights.push(newFight);
-					
-					let newFightResult = 'Winner: ' + td[1].text + ' by ' + td[4].text + ( td[4].text.includes('Decision') ? '' : ' at ' + 'r. ' + td[5].text + ', ' + td[6].text);
-					
-					latestDetails.fights.push(newFightResult);
+
 				}
 			}
 		}

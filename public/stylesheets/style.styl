@@ -44,8 +44,22 @@ sup a
 	color #eee !important
 	padding-right 0 !important
 	font-size: 0.8rem;
+	
 .hideResults .fightResult
 	color #000 !important
+	
+.hideResults .fighter
+	color #FFF !important
+	
+.fighter sup
+	color #FFF !important
+	
+.winner .fighter
+	color #74b374
+	transition color 0.5s ease
+.loser .fighter
+	color #c15555
+	transition color 0.5s ease
 
 .hidden p > *:not(.donthide), .hidden > *:not(.donthide)
 	display none
@@ -66,12 +80,22 @@ input[type=text]
 	width 15px
 	text-align center
 	
-.miniSpoiler
-	color black
-.miniSpoiler span
+.via
 	color white
 	cursor pointer
 	font-size 9pt
+.viaSpoiler
+	color black
+	
+.hideResults .viaDesc
+	color black
+	
+.showResults .via
+	display none
+.showResults .viaSpoiler
+	color white !important
+	
+
 
 +mobile()
 	body
