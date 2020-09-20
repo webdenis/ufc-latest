@@ -35,7 +35,16 @@ function showResults(e) {
 	pastEvent.classList.remove("hideResults");
 	pastEvent.classList.add("showResults");
 	
-	document.getElementsByClassName("showVias")[0].remove();
+	if (document.getElementsByClassName("showVias")[0])
+		document.getElementsByClassName("showVias")[0].remove();
+	
+	let FRs = document.getElementsByClassName("finishRate");
+	
+	if (FRs && FRs.length) {
+		for (var i = 0; i < FRs.length; i++) {
+		   FRs[i].click();
+		}
+	}
 }
 
 async function getRecord(url, e) {
@@ -98,6 +107,23 @@ function showVias(e) {
 	   tds[i].classList.add('showResults');
 	}
 	e.remove();
+}
+
+function calcFinishRate(cn, e) {
+	let trs = document.getElementsByClassName(cn);
+	let f = 0; // Finishes
+	let t = trs.length; // Total
+	
+	for (var i = 0; i < trs.length; i++) {
+	   if (trs[i].innerHTML == 'Finish') {
+		   f++;
+	   }
+	}
+	
+	e.innerHTML = '[Finish rate: ' + (f/t*100).toFixed(0) + '%]';
+	e.classList.remove('active');
+	e.removeAttribute("onclick");
+	
 }
 
 function toggleSettings() {

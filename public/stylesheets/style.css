@@ -60,16 +60,20 @@ sup a {
 .hideResults .fighter {
   color: #fff !important;
 }
+.fighter {
+  transition: color 0.5s ease;
+}
 .fighter sup {
   color: #fff !important;
 }
 .winner .fighter {
   color: #74b374;
-  transition: color 0.5s ease;
 }
 .loser .fighter {
   color: #c15555;
-  transition: color 0.5s ease;
+}
+.draw .fighter {
+  color: #ffe29e;
 }
 .hidden p > *:not(.donthide),
 .hidden > *:not(.donthide) {
@@ -104,11 +108,19 @@ input[type=text] {
 .hideResults .viaDesc {
   color: #000;
 }
-.showResults .via {
+.showResults .via,
+table.showResults .viaSpoiler {
   display: none;
 }
-.showResults .viaSpoiler {
+td.showResults .viaSpoiler {
   color: #fff !important;
+}
+.finishRate.active {
+  cursor: pointer;
+}
+.finishRate {
+  font-size: 10pt;
+  margin-left: 10px;
 }
 @media (max-width: 1080px) {
   body {

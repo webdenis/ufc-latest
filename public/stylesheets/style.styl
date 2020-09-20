@@ -50,16 +50,21 @@ sup a
 	
 .hideResults .fighter
 	color #FFF !important
+
+.fighter
+	transition color 0.5s ease
 	
 .fighter sup
 	color #FFF !important
 	
 .winner .fighter
 	color #74b374
-	transition color 0.5s ease
+	
 .loser .fighter
 	color #c15555
-	transition color 0.5s ease
+
+.draw .fighter
+	color #ffe29e
 
 .hidden p > *:not(.donthide), .hidden > *:not(.donthide)
 	display none
@@ -90,12 +95,19 @@ input[type=text]
 .hideResults .viaDesc
 	color black
 	
-.showResults .via
+.showResults .via, table.showResults .viaSpoiler
 	display none
-.showResults .viaSpoiler
+	
+td.showResults .viaSpoiler
 	color white !important
 	
+.finishRate.active
+	cursor pointer
 
+.finishRate
+	font-size 10pt
+	margin-left 10px
+	
 
 +mobile()
 	body

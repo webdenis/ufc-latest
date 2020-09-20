@@ -68,8 +68,9 @@ router.get('/', function(req, res, next) {
 					let firstLink = td[1].querySelector('a') ? WIKI_BASE_URL + td[1].querySelector('a').getAttribute('href') : null;
 					let secondLink = td[3].querySelector('a') ? WIKI_BASE_URL + td[3].querySelector('a').getAttribute('href') : null;
 					let fightResult = td[4].text.split(' (')[0];
-					let fightSpoiler = fightResult == 'KO' || fightResult == 'TKO' ? 'KO/TKO' : fightResult.substring(0,3).toUpperCase();
-					let fightSpoilerDesc = '(' + td[4].text.split(' (')[1] + (td[4].text.includes('Decision') ? '' : ' at ' + 'r. ' + td[5].text + ', ' + td[6].text);
+					//let fightSpoiler = fightResult == 'KO' || fightResult == 'TKO' ? 'KO/TKO' : fightResult.substring(0,3).toUpperCase();
+					let fightSpoiler = ['DEC','DRA'].includes(fightResult.substring(0,3).toUpperCase()) ? 'Decision' : 'Finish';
+					let fightSpoilerDesc = td[4].text + (['DEC','DRA'].includes(fightResult.substring(0,3).toUpperCase()) ? '' : ' at ' + 'r. ' + td[5].text + ', ' + td[6].text);
 					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink], method: fightSpoiler, methodDesc: fightSpoilerDesc, winner: td[1].text};
 					
 					latestDetails.fights.push(newFight);
