@@ -38,6 +38,9 @@ function showResults(e) {
 	if (document.getElementsByClassName("showVias")[0])
 		document.getElementsByClassName("showVias")[0].remove();
 	
+	if (document.getElementsByClassName("showFotn")[0])
+		document.getElementsByClassName("showFotn")[0].remove();
+	
 	let FRs = document.getElementsByClassName("finishRate");
 	
 	if (FRs && FRs.length) {
@@ -124,6 +127,12 @@ function calcFinishRate(cn, e) {
 	e.classList.remove('active');
 	e.removeAttribute("onclick");
 	
+}
+
+function showFotn(e) {
+	let pastEvent = document.getElementById("pastEvent");
+	pastEvent.classList.add('showFotn');
+	e.remove();
 }
 
 function toggleSettings() {

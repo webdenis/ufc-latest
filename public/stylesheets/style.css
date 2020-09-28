@@ -122,6 +122,22 @@ td.showResults .viaSpoiler {
   font-size: 10pt;
   margin-left: 10px;
 }
+.fotn {
+  font-size: 12pt;
+  color: #000;
+  background: #fff;
+  font-weight: bold;
+  padding: 3px 6px;
+  margin-left: 5px;
+  border-radius: 5px;
+}
+.hideResults .fotn {
+  display: none;
+}
+table.showResults .fotn,
+.showFotn .fotn {
+  display: inline-block !important;
+}
 @media (max-width: 1080px) {
   body {
     padding: 15px;

@@ -26,6 +26,7 @@ block content
 					sup 
 						small.wiki (Wikipedia)
 			span.showAll.showVias(onclick="showVias(this)") [Show vias]
+			span.showAll.showFotn(onclick="showFotn(this)") [Show FotN]
 			span.showAll(onclick="showResults(this)") [Show full results]
 			span.showAll(onclick="loadRecords(this, '#{latestFightContent.date.replace(/ /g,'')}')") [Load fighters records]
 			span.hidePast.showAll.donthide(onclick="hidePast(this, '#{latestFightContent.date.replace(/ /g,'')}')") [Hide]
@@ -44,6 +45,10 @@ block content
 						tr
 							td
 								=value.weight
+								- if (value.fotn) {
+									span.fotn(title="Fight of the Night")
+										| FotN
+								- }
 							td(class="#{ value.methodDesc.includes('Draw') ? 'draw' : (value.first[0] == value.winner ? 'winner' :'loser') }")
 								- if (value.first && value.first[1]) {
 									a(class="fighter",href="#{value.first[1]}",target="_blank") #{value.first[0]} 

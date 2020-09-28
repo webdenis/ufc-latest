@@ -51,6 +51,15 @@ router.get('/', function(req, res, next) {
 		var rootA = parse(domA.serialize());
 		
 		var tableA = rootA.querySelector('.toccolours');
+		var fotnExists = false;
+		var bonusAwards = rootA.querySelectorAll('b');
+		
+		// find FOTN
+		for (let j = 0; j < bonusAwards.length; j++) {
+			if (bonusAwards[j].text.includes('Fight of the Night')) {
+				fotnExists = bonusAwards[j].text;
+			}
+		}
 		
 		let trChildren = tableA.querySelectorAll('tr');
 		
@@ -70,15 +79,16 @@ router.get('/', function(req, res, next) {
 					let fightResult = td[4].text.split(' (')[0];
 					//let fightSpoiler = fightResult == 'KO' || fightResult == 'TKO' ? 'KO/TKO' : fightResult.substring(0,3).toUpperCase();
 					let fightSpoiler = ['DEC','DRA'].includes(fightResult.substring(0,3).toUpperCase()) ? 'Decision' : 'Finish';
+					let fotnFight = (fotnExists && (fotnExists.includes(td[1].text.trim()) || fotnExists.includes(td[3].text.trim()))) ? true : false;
 					let fightSpoilerDesc = td[4].text + (['DEC','DRA'].includes(fightResult.substring(0,3).toUpperCase()) ? '' : ' at ' + 'r. ' + td[5].text + ', ' + td[6].text);
-					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink], method: fightSpoiler, methodDesc: fightSpoilerDesc, winner: td[1].text};
+					let newFight = {weight: td[0].text, first: rand ? [td[1].text, firstLink] : [td[3].text, secondLink], second: rand ? [td[3].text, secondLink] : [td[1].text, firstLink], method: fightSpoiler, methodDesc: fightSpoilerDesc, winner: td[1].text, fotn: fotnFight };
 					
 					latestDetails.fights.push(newFight);
 
 				}
 			}
 		}
-		
+		console.log(latestDetails);
 		console.log('Loaded latest fight info.');
 		
 		// Get next fights list
