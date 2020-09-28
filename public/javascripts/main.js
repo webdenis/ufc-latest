@@ -38,8 +38,8 @@ function showResults(e) {
 	if (document.getElementsByClassName("showVias")[0])
 		document.getElementsByClassName("showVias")[0].remove();
 	
-	if (document.getElementsByClassName("showFotn")[0])
-		document.getElementsByClassName("showFotn")[0].remove();
+	if (document.getElementsByClassName("showFotnButton")[0])
+		document.getElementsByClassName("showFotnButton")[0].remove();
 	
 	let FRs = document.getElementsByClassName("finishRate");
 	
