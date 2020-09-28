@@ -50,12 +50,13 @@ function showResults(e) {
 	}
 }
 
-async function getRecord(url, e) {
+async function getRecord(url, e) {0
+	e.removeAttribute("onclick");
 	let response = await fetch('/getRecord/' + url);
 	let data = await response.json()
 	
 	e.innerHTML = data.fighterRecord;
-	e.removeAttribute("onclick");
+	
 	e.classList.remove("getRecord");
 	e.setAttribute("title", data.recordDetails);
 	
