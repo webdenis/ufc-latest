@@ -4,7 +4,10 @@ block content
 	div.heading
 		h1=title
 		h3
+			a(href="/rankings") Rankings
+		h3
 			a(onclick="toggleSettings()") Settings
+			
 		div.settings.hide
 			span Autoload fighter records for one next event
 			input#autoloadNextEventRecords(type='checkbox',checked=false,onclick="toggleSetting('autoloadNextEventRecords')")

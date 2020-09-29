@@ -7,6 +7,7 @@ var stylus = require('stylus');
 
 var indexRouter = require('./routes/index');
 var recordRouter = require('./routes/record');
+var rankingsRouter = require('./routes/rankings');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/getRecord/:id', recordRouter);
+app.use('/rankings', rankingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

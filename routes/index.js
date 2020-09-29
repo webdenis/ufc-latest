@@ -88,7 +88,7 @@ router.get('/', function(req, res, next) {
 				}
 			}
 		}
-		console.log(latestDetails);
+		//console.log(latestDetails);
 		console.log('Loaded latest fight info.');
 		
 		// Get next fights list
