@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
 	
 	var tables = root.querySelectorAll('.wikitable');
 	
-	var test = '<style>body { background-color: black; color: white; font-family: Calibri; } a { text-decoration: none; color: white; } caption { font-weight: bold; text-align: left; } .rankTable { display: inline-block; margin: 30px; } </style>';
+	var test = '<style>body { padding: 20px 45px; background-color: black; color: white; font-family: Calibri; } a { text-decoration: none; color: white; } caption { font-weight: bold; text-align: left; } .rankTable { display: inline-block; margin: 30px; } </style>';
 	
 	for (let i = 3; i < tables.length; i++) {
 		test += '<div class="rankTable"><h2>' + weightDivisions[i-3] + '</h2>';
