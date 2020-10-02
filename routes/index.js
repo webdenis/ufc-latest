@@ -150,8 +150,10 @@ router.get('/', function(req, res, next) {
 
 						let bout = eachBout[m].text.replace(' bout','').split('[')[0];
 						let weightclass = bout.split(':')[0];
-						let fighter1 = bout.split(':')[1].split(' vs. ')[0].trim();
-						let fighter2 = bout.split(':')[1].split(' vs. ')[1].trim();
+						console.log(event.link);
+						console.log('Bout: ',bout);
+						let fighter1 = bout.split(':')[1].split('vs.')[0].trim();
+						let fighter2 = bout.split(':')[1].split('vs.')[1].trim();
 						
 						let eachLink = eachBout[m].querySelectorAll('a');
 						let oneLink = null;
