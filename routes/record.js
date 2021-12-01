@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
   console.log('Fetching record for: ' + req.params.id);
   
   JSDOM.fromURL(WIKI_URL + req.params.id).then(dom => {
-	
+	  	
 	var root = parse(dom.serialize());
 	
 	let re = /#.*(in the)/g;
@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
 		}
 	}
 		
-	var infobox = root.querySelector('.collapsible');
+	var infobox = root.querySelector('.mw-collapsible');
 	
 	var breakdown = infobox.querySelectorAll('td');
 	

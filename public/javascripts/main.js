@@ -62,7 +62,7 @@ async function getRecord(url, e) {0
 	
 	//ranking
 	let a = e.parentNode.parentNode.querySelector('a');
-	console.log(a);
+
 	if (data.ranking) {
 		if (!a.innerHTML.includes('(c)') && !a.innerHTML.includes('(ic)')) {
 			a.innerHTML = '<sup>#'+data.ranking+'</sup> ' + a.innerHTML;
