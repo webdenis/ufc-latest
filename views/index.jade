@@ -21,9 +21,9 @@ block content
 	div(id="#{latestFightContent.date.replace(/ /g,'')}",class="pastEventDiv")
 		p.donthide.paddedT
 			span.donthide
-				=latestFightContent.date
+				b=latestFightContent.date
 				|  - 
-				b=latestFightContent.name
+				=latestFightContent.name
 				| 
 				a(href="#{latestFightContent.link}")
 					sup 
@@ -85,9 +85,9 @@ block content
 	each event in nextFightContent
 		div(id="#{event.date.replace(/ /g,'')}",class="newEventDiv")
 			p.paddedT
-				=event.date
+				b=event.date
 				|  - 
-				b=event.name
+				=event.name
 				| 
 				a(href="#{event.link}")
 					sup 

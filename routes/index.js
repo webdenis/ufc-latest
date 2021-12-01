@@ -40,7 +40,7 @@ router.get('/', function(req, res, next) {
 	
 	latestDetails.link = WIKI_BASE_URL + latestFight.querySelectorAll('a')[0].getAttribute('href');
 	latestDetails.name = latestFight.querySelectorAll('a')[0].text;
-	latestDetails.date = latestFight.querySelectorAll('span')[0].text;
+	latestDetails.date = latestFight.querySelectorAll('span')[0].text.split(',')[0];
 	latestDetails.fights = [];
 	
 	console.log('Loaded latest fight.');
@@ -101,7 +101,7 @@ router.get('/', function(req, res, next) {
 				nextFightsList.push({
 					link: WIKI_BASE_URL + children[i].querySelectorAll('a')[0].getAttribute('href'),
 					name: children[i].querySelectorAll('a')[0].text,
-					date: children[i].querySelectorAll('span')[0].text,
+					date: children[i].querySelectorAll('span')[0].text.split(',')[0],
 					fights: [],
 					announced: []
 				});
