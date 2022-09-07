@@ -3,6 +3,9 @@ extends layout
 block content
 	div.heading
 		h1=title
+		- if (cached) {
+			<small>Cached during last 15 minutes</small>
+		- }
 		h3
 			a(href="/rankings") Rankings
 		h3

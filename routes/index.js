@@ -237,7 +237,7 @@ function parseNextDOM(res, domB, event) {
 	
 	theEnd++;
 	if (theEnd >= nextFightsNum) {
-		res.render('index', { title: 'UFC Latest', latestFightContent: latestDetails, nextFightContent: nextFightsList });	
+		res.render('index', { title: 'UFC Latest', latestFightContent: latestDetails, nextFightContent: nextFightsList, cached: isCached });	
 	}
 }
 
@@ -283,6 +283,7 @@ function cached(file) {
 var nextFightsList = [];
 var latestDetails = {}
 var theEnd = 0;
+var isCached = false;
 
 /* GET home page */
 router.get('/', function(req, res, next) {
@@ -304,6 +305,7 @@ router.get('/', function(req, res, next) {
 
 	let url = WIKI_BASE_URL + "/wiki/List_of_UFC_events";
 	if (cached(url)) {
+		isCached = true;
 		console.log('File cached, reading from FILE.');
 		JSDOM.fromFile(cacheFileURL(url)).then(dom => {
 			parseMainDOM(res, dom);
