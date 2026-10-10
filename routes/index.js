@@ -31,7 +31,7 @@ function parseMainDOM(res, dom) {
 	// Get latest past fight
 	var latestFight = tables[1].querySelectorAll('tbody')[0].querySelectorAll('tr')[1];
 	
-	latestDetails.link = WIKI_BASE_URL + latestFight.querySelectorAll('a')[0].getAttribute('href');
+	latestDetails.link = /*WIKI_BASE_URL + */latestFight.querySelectorAll('a')[0].getAttribute('href');
 	latestDetails.name = latestFight.querySelectorAll('a')[0].text;
 	latestDetails.date = latestFight.querySelectorAll('span')[0].text.split(',')[0];
 	latestDetails.fights = [];
@@ -66,7 +66,7 @@ function parsePrepare(res, domA, tables) {
 	for (let i = children.length; i >= children.length - nextFightsNum * 2; i--) {
 		if (children[i] && children[i].toString().length > 10) {
 			nextFightsList.push({
-				link: WIKI_BASE_URL + children[i].querySelectorAll('a')[0].getAttribute('href'),
+				link: /*WIKI_BASE_URL + */children[i].querySelectorAll('a')[0].getAttribute('href'),
 				name: children[i].querySelectorAll('a')[0].text,
 				date: children[i].querySelectorAll('span')[0].text.split(',')[0],
 				fights: [],
